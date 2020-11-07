@@ -29,6 +29,12 @@ class SyntheticData():
         validate=validate
         )    
         return merged
+
+    def generate_date(self,start_date = datetime.datetime(2020,2,14),end_date = datetime.datetime.now()):
+        days_between = (end_date - start_date).days
+        random_day = np.random.randint(low=1,high=days_between)
+        random_date = start_date + datetime.timedelta(days=random_day)
+        return random_date
         
 
 
