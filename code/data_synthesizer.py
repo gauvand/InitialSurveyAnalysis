@@ -14,13 +14,18 @@ class SyntheticData():
         self.faker.add_provider(lorem)
         self.n = size
     
-    def generate_data(self,data, p):
+    def generate_probabilities(self,n_choices):
+        p = np.array([np.random.randint(low=1,high=100) for i in range(n_choices)])
+        p = p / sum(p)
+    
+    def generate_data(self, data, p):
         '''
         data: array/list of choices
         p: probabilities of choices
         '''
         gen_data  = np.random.choice(data, size = self.n, p = p)
         return gen_data
+    
 
     def merge(self,left,right,on,how = "left",indicator = "match",validate=None):
 

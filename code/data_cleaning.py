@@ -38,7 +38,7 @@ yn = ["Yes","No"]
 ynm = ["Yes","No","Not Sure", "Prefer Not to Answer"]
 answers = dict()
 # descriptors 0
-answers[0] = [np.nan]
+answers[0] = np.nan
 # Section 1
 # 1-8
 for i in range(1,9):
@@ -49,7 +49,7 @@ answers[9] = ['A lot less than normal','Somewhat less than normal', 'About the s
 answers[10] = ["All of the time", "Most of the time", "Sometimes","Rarely"]
 # Section 2
 answers[11] = yn
-answers[12] = datagen.generate_date()
+answers[12] = 'date'
 answers[13] = options[options["Parent code"].str.contains("cdc_covid_19_7_xx23")].Display.to_list()
 answers[14] = options[options["Parent code"].str.contains('copect_17')].Display.to_list()
 answers[15] = ynm
@@ -78,7 +78,7 @@ answers[35] =  options[options["Parent code"].str.contains('ukmh_j3')].Display.t
 answers[36] = [i for i in range(0,15)]
 answers[37] = [i for i in range(0,14)]
 answers[38] = options[options["Parent code"].str.contains('cu_covid')].Display.to_list()
-answers[39] = datagen.generate_text(3)
+answers[39] = 'text'
 answers[40] = options[options["Parent code"].str.contains('basics_12')].Display.to_list()
 answers[41] = 'text'
 answers[42] = options[options["Parent code"].str.contains('basics_11')].Display.to_list()
@@ -213,6 +213,6 @@ answers[178] = 'text'
 # Convert to one-column df
 answer_col = {"answers":answers}
 # Save to csv
-pd.concat([pd.DataFrame({"qid": [i for i in range(0, len(questions))]}) , questions[["Display"]] ,pd.DataFrame(answer_col)],axis=1).to_csv('../data/ques_ans_clean.csv',index=False)
+pd.concat([pd.DataFrame({"qid": [i for i in range(0, len(questions))]}) , questions[["Display","Answer Type"]] ,pd.DataFrame(answer_col)],axis=1).to_json('../data/ques_ans_clean.json')
 
-print("Written to csv!")
+print("Written to json!")
