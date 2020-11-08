@@ -1,14 +1,18 @@
 import pandas as pd
 import numpy as np
 import datetime
+from faker import Faker
+from faker.providers import lorem
 
 class SyntheticData():
-    def __init__(self,size):
+    def __init__(self,size,seed=123):
         '''
         size: number of data points to generate
         '''
+        Faker.seed(seed)
+        self.faker = Faker()
+        self.faker.add_provider(lorem)
         self.n = size
-        self.data = pd.DataFrame([])
     
     def generate_data(self,data, p):
         '''
@@ -35,6 +39,12 @@ class SyntheticData():
         random_day = np.random.randint(low=1,high=days_between)
         random_date = start_date + datetime.timedelta(days=random_day)
         return random_date
+    
+    def generate_text(self,n_sentences):
+        return self.faker.paragraph(nb_sentences=5)
+    
+    def generate_word(self,n_words):
+        return self.faker.word()
         
 
 
