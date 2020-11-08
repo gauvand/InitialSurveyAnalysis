@@ -1,10 +1,10 @@
 import sys
 sys.path.append('../code/')
-import imp
+import importlib
 import os
 
 try:
-    imp.find_module("faker"); imp.find_module("us")
+    importlib.util.find_spec("faker"); importlib.util.find_spec("us")
 except ImportError:
     os.system("pip3 install faker")
     os.system("pip3 install us")
@@ -12,7 +12,7 @@ finally:
     import faker
     from us import states
 
-from data_synthesizer import * 
+from classes import * 
 
 
 try:
@@ -196,7 +196,7 @@ answers[158] = yn
 answers[159] = use_freq
 # Section 15
 brcs = ["Does not describe me at all", "Does not describe me Neutral","Describes me", "Describes me very well"]
-for i in range(160,165):
+for i in range(160,164):
     answers[i] = brcs
 # Section 16
 teds = ["Almost everyday", "At least once a week", "A few times a month", "Never"]
@@ -215,4 +215,4 @@ answer_col = {"answers":answers}
 # Save to csv
 pd.concat([pd.DataFrame({"qid": [i for i in range(0, len(questions))]}) , questions[["Display","Answer Type"]] ,pd.DataFrame(answer_col)],axis=1).to_json('../data/ques_ans_clean.json')
 
-print("Written to json!")
+print("Cleaned questions and answers to json!")
