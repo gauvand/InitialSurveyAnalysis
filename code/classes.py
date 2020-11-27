@@ -51,14 +51,5 @@ class SyntheticData():
     def generate_word(self,n_words):
         return self.faker.word()
         
-
-
-# def random_genders(genders, p, size):
-#     '''
-#     genders: array of genders 
-#     p: probability associated with those genders
-#     size: number of samples to draw
-#     '''
-#     return np.random.choice(genders,size=size,p=p)
-
-# def random_location()
+if __name__ == '__main__':
+    pass
